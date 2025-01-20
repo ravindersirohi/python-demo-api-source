@@ -4,23 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flask Api UI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<h1>Flask Api UI</h1>
-
-<h2>Item name</h2>
-
-<hr/>
-<form id="insertForm">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-    <button type="button" onclick="addItem()">Add Item</button>
-</form>
-
-<h2>List Items</h2>
-<hr/>
-<ul id="itemList"></ul>
-
+    <header>
+        <h1>Flask Api UI</h1>
+    </header>
+<main>
+    <h2>Item name</h2>
+    <form id="insertForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="button" onclick="addItem()">Add Item</button>
+    </form>
+    <h2>List Items</h2>
+    <hr/>
+    <ul id="itemList"></ul>
+    <footer> 
+        <hr/>
+        <p>&copy; 2025 Flask Demo</p> 
+    </footer>
+</main>
 <script>
     function addItem() {
         const name = document.getElementById('name').value;
