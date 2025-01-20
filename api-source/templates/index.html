@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Api UI</title>
+</head>
+<body>
+<h1>Flask Api UI</h1>
+
+<h2>Item name</h2>
+
+<hr/>
+<form id="insertForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <button type="button" onclick="addItem()">Add Item</button>
+</form>
+
+<h2>List Items</h2>
+<hr/>
+<ul id="itemList"></ul>
+
+<script>
+    function addItem() {
+        const name = document.getElementById('name').value;
+        fetch('/add-item', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 'name': name }),
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+            listItems();
+        });
+    }
+
+    function listItems() {
+        fetch('/list-items')
+        .then(response => response.json())
+        .then(data => {
+            const dataList = document.getElementById('itemList');
+            dataList.innerHTML = '';
+            data.forEach(record => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Name: ${record.name}`;
+                dataList.appendChild(listItem);
+            });
+        });
+    }
+
+    // Initial load.
+    listItems();
+</script>
+</body>
+</html>

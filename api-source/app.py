@@ -1,14 +1,29 @@
-from flask import Flask, jsonify, request
+from flask import Flask,render_template, jsonify, request
 
 app = Flask(__name__)
 
+static_list = []
+
 @app.route('/')
 def home():
-    return "Flask API is up!"
+    return render_template('index.html')
 
 @app.route('/health-check')
 def health_check():
     return "Hello, I am healthy!"
+
+@app.route('/list-items')
+def list_items():
+    return jsonify(static_list)
+
+@app.route('/add-item', methods=['POST'])
+def add_item():
+    name = request.json['name']
+    if name is not None and name !='':
+        static_list.append({"name":name})
+        return "Item added into the list!"
+    else:
+        return "Unable to add item!"
 
 if __name__ == '__main__':
     # app.run(debug=True, host='0.0.0.0')
