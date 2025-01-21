@@ -8,9 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # permissions:
-    #   contents: 'read'
-    #   id-token: 'write'
+    env: 
+      GCP_LOCATION: "europe-west2"
 
     steps:
       - name: Checkout code
@@ -48,7 +47,7 @@ jobs:
         run: | 
           gcloud run deploy my-flask-app \ 
             --image ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA \ 
-            --region europe-west2 \ 
+            --region ${{ env.GCP_LOCATION }} \ 
             --platform managed \ 
             --allow-unauthenticated
 
