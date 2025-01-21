@@ -32,6 +32,7 @@ jobs:
         with:
           project_id: sirohiapps
           region: europe-west2
+          name: cloud-func-flask-api
           runtime: python38
           entry_point: main
           credentials: ${{ secrets.GCP_CREDENTIALS }}
