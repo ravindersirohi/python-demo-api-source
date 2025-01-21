@@ -27,12 +27,20 @@ jobs:
           pip install -r requirements.txt
         working-directory: api-source
 
+      - name: Set up Google Cloud SDK 
+        uses: google-github-actions/auth@v2 
+        with: 
+          project_id: ${{ secrets.GCP_PROJECT_ID }} 
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }} 
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
       - name: Deploy to GCP Cloud Functions
         uses: google-github-actions/deploy-cloud-functions@main
         with:
-          project_id: sirohiapps
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
           region: europe-west2
           name: cloud-func-flask-api
           runtime: python38
           entry_point: main
-          credentials: ${{ secrets.GCP_CREDENTIALS }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          # credentials: ${{ secrets.GCP_CREDENTIALS }}
