@@ -21,7 +21,6 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-        working-directory: /api-source
 
       - name: Install dependencies
         run: |
