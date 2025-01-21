@@ -12,21 +12,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      
+      - name: Set working directory 
+        run: mkdir -p /api-source
+        working-directory: /api-source
+      
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
+        working-directory: /api-source
 
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+        working-directory: /api-source
 
       - name: Deploy to GCP Cloud Functions
         uses: google-github-actions/deploy-cloud-functions@main
         with:
           project_id: my-gcp-project
-          region: us-central1
+          region: europe-west2
           runtime: python38
           entry_point: main
           credentials: ${{ secrets.GCP_CREDENTIALS }}
