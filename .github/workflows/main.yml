@@ -28,7 +28,8 @@ jobs:
       - name: Set up Google Cloud SDK 
         uses: google-github-actions/setup-gcloud@v0.2.0 
         with: 
-          project_id: ${{ secrets.GCP_PROJECT_ID }} service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }} 
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: Build Docker image 
         run: | 
