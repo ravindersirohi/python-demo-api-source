@@ -51,7 +51,7 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           region: europe-west2
           name: cloud-func-flask-api
-          runtime: python310
+          runtime: python38
           entry_point: main
           credentials: ${{ secrets.GCP_CREDENTIALS }}
           source_dir: api-source
