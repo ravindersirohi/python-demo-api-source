@@ -36,6 +36,7 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }} 
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }} 
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          audience: "https://iam.googleapis.com/projects/${{ secrets.GCP_PROJECT_ID }}/locations/global/workloadIdentityPools/github-pool/providers/github"
 
       - name: Deploy to GCP Cloud Functions
         uses: google-github-actions/deploy-cloud-functions@main
