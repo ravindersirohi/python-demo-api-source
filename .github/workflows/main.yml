@@ -34,6 +34,7 @@ jobs:
       - name: Build Docker image 
         run: | 
           docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA .
+        working-directory: api-source
 
       # - name: Install dependencies
       #   run: |
