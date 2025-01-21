@@ -52,4 +52,4 @@ jobs:
           entry_point: app
           # service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           credentials: ${{ secrets.GCP_CREDENTIALS }}
-          source_dir: .
+          source_dir: api-source
