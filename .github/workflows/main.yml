@@ -25,33 +25,42 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-        working-directory: api-source
+      - name: Set up Google Cloud SDK 
+        uses: google-github-actions/setup-gcloud@v0.2.0 
+        with: 
+          project_id: ${{ secrets.GCP_PROJECT_ID }} service_account_key: ${{ secrets.GCP_CREDENTIALS }}
 
-      # - name: Set up Google Cloud SDK 
-      #   uses: google-github-actions/auth@v2 
-      #   with: 
-      #     project_id: ${{ secrets.GCP_PROJECT_ID }} 
-      #     workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }} 
-      #     service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+      - name: Build Docker image 
+        run: | 
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA .
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0.4.0
-        with:
-          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+      # - name: Install dependencies
+      #   run: |
+      #     pip install -r requirements.txt
+      #   working-directory: api-source
 
-      - name: Set environment variables 
-        run: echo "PORT=8080" >> $GITHUB_ENV
+      # # - name: Set up Google Cloud SDK 
+      # #   uses: google-github-actions/auth@v2 
+      # #   with: 
+      # #     project_id: ${{ secrets.GCP_PROJECT_ID }} 
+      # #     workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }} 
+      # #     service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
-      - name: Deploy to GCP Cloud Functions
-        uses: google-github-actions/deploy-cloud-functions@main
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          region: europe-west2
-          name: cloud-func-flask-api
-          runtime: python310
-          entry_point: main
-          credentials: ${{ secrets.GCP_CREDENTIALS }}
-          source_dir: api-source
+      # - name: Authenticate to Google Cloud
+      #   uses: google-github-actions/auth@v0.4.0
+      #   with:
+      #     credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      # - name: Set environment variables 
+      #   run: echo "PORT=8080" >> $GITHUB_ENV
+
+      # - name: Deploy to GCP Cloud Functions
+      #   uses: google-github-actions/deploy-cloud-functions@main
+      #   with:
+      #     project_id: ${{ secrets.GCP_PROJECT_ID }}
+      #     region: europe-west2
+      #     name: cloud-func-flask-api
+      #     runtime: python310
+      #     entry_point: main
+      #     credentials: ${{ secrets.GCP_CREDENTIALS }}
+      #     source_dir: api-source
