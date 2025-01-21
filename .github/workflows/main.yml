@@ -23,7 +23,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
@@ -51,7 +51,7 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           region: europe-west2
           name: cloud-func-flask-api
-          runtime: python38
+          runtime: python310
           entry_point: main
           credentials: ${{ secrets.GCP_CREDENTIALS }}
           source_dir: api-source
