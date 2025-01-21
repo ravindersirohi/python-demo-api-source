@@ -8,9 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
+    # permissions:
+    #   contents: 'read'
+    #   id-token: 'write'
 
     steps:
       - name: Checkout code
@@ -50,6 +50,4 @@ jobs:
           name: cloud-func-flask-api
           runtime: python38
           entry_point: app
-          # service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           credentials: ${{ secrets.GCP_CREDENTIALS }}
-          source_dir: api-source
