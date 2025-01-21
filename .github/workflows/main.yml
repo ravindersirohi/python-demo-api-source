@@ -49,7 +49,7 @@ jobs:
           region: europe-west2
           name: cloud-func-flask-api
           runtime: python38
-          entry_point: main
+          entry_point: app
           # service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           credentials: ${{ secrets.GCP_CREDENTIALS }}
           source_dir: .
