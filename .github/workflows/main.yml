@@ -36,6 +36,18 @@ jobs:
           docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA .
         working-directory: api-source
 
+      - name: Push Docker image 
+        run: | 
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA
+
+      - name: Deploy to Cloud Run 
+        run: | 
+          gcloud run deploy my-flask-app \ 
+            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA \ 
+            --region europe-west2 \ 
+            --platform managed \ 
+            --allow-unauthenticated
+
       # - name: Install dependencies
       #   run: |
       #     pip install -r requirements.txt
