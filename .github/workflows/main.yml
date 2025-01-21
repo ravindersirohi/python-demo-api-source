@@ -52,3 +52,4 @@ jobs:
           entry_point: main
           # service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           credentials: ${{ secrets.GCP_CREDENTIALS }}
+          source_dir: .
