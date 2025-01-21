@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Set working directory 
-        run: mkdir -p /api-source
-        working-directory: /api-source
+        run: mkdir -p api-source
+        working-directory: api-source
       
       - name: Set up Python
         uses: actions/setup-python@v2
