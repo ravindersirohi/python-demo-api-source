@@ -42,6 +42,9 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
+      - name: Set environment variables 
+        run: echo "PORT=8080" >> $GITHUB_ENV
+
       - name: Deploy to GCP Cloud Functions
         uses: google-github-actions/deploy-cloud-functions@main
         with:
