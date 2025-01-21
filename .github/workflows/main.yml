@@ -30,7 +30,7 @@ jobs:
       - name: Deploy to GCP Cloud Functions
         uses: google-github-actions/deploy-cloud-functions@main
         with:
-          project_id: my-gcp-project
+          project_id: sirohiapps
           region: europe-west2
           runtime: python38
           entry_point: main
