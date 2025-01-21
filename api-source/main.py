@@ -36,7 +36,7 @@ import os
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
+def main():
     return "Hello, World!"
 
 @app.route('/health')
