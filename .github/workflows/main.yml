@@ -33,21 +33,21 @@ jobs:
 
       - name: Configure Docker to use Artifact Registry 
         run: | 
-          gcloud auth configure-docker ${{ variables.GCP_LOCATION }}-docker.pkg.dev
+          gcloud auth configure-docker ${{ env.GCP_LOCATION }}-docker.pkg.dev
 
       - name: Build Docker image 
         run: | 
-          docker build -t ${{ variables.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA .
+          docker build -t ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA .
         working-directory: api-source
 
       - name: Push Docker image 
         run: | 
-          docker push ${{ variables.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA
+          docker push ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA
 
       - name: Deploy to Cloud Run 
         run: | 
           gcloud run deploy my-flask-app \ 
-            --image ${{ variables.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA \ 
+            --image ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-flask-app:$GITHUB_SHA \ 
             --region europe-west2 \ 
             --platform managed \ 
             --allow-unauthenticated
