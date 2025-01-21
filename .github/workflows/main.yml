@@ -51,3 +51,4 @@ jobs:
           runtime: python310
           entry_point: main
           credentials: ${{ secrets.GCP_CREDENTIALS }}
+          source_dir: api-source
