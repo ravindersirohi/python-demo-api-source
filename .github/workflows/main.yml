@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       GCP_LOCATION: "europe-west2"
+      REPOSITORY_NAME: "my-flask-app"
 
     steps:
       - name: Checkout code
@@ -36,17 +37,17 @@ jobs:
 
       - name: Build Docker image 
         run: | 
-          docker build -t ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-flask-app/image:$GITHUB_SHA .
+          docker build -t ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPOSITORY_NAME }}/image:$GITHUB_SHA .
         working-directory: api-source
 
       - name: Push Docker image 
         run: | 
-          docker push ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-flask-app/image:$GITHUB_SHA
+          docker push ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPOSITORY_NAME }}/image:$GITHUB_SHA
 
       - name: Deploy to Cloud Run 
         run: | 
           gcloud run deploy my-flask-app \ 
-            --image ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-flask-app/image:$GITHUB_SHA \ 
+            --image ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPOSITORY_NAME }}/image:$GITHUB_SHA \ 
             --region ${{ env.GCP_LOCATION }} \ 
             --platform managed \ 
             --allow-unauthenticated
