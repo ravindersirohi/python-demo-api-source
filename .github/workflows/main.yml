@@ -45,11 +45,11 @@ jobs:
           docker push ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPOSITORY_NAME }}/image:$GITHUB_SHA
 
       - name: Deploy to Cloud Run 
-        run: | 
-          gcloud run deploy my-flask-app \ 
-            --image ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPOSITORY_NAME }}/image:$GITHUB_SHA \ 
-            --region ${{ env.GCP_LOCATION }} \ 
-            --platform managed \ 
+        run: |
+          gcloud run deploy my-flask-app \
+            --image ${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPOSITORY_NAME }}/image:$GITHUB_SHA \
+            --region ${{ env.GCP_LOCATION }} \
+            --platform managed \
             --allow-unauthenticated
 
       # - name: Install dependencies
