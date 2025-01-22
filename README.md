@@ -1,5 +1,5 @@
-# python-demo-api-source
-Python API using flask and Google Cloud Run (Containerized Function)
+# Python Flask Api
+Python flask Api deployed on Google Cloud Run (Containerized Function)
 
 ## Prerequisite
 
@@ -15,6 +15,32 @@ Following are the list of libraries required for this API.
 Perform the below command from prompt.
 - pip install Flask - To install the flask.
 - python app.py - To run the API
+
+## Terraform
+
+Below the sample terraform module for Cloud Run functions
+
+```
+resource "google_cloud_run_v2_service" "default" {
+  name     = "cloud-run-flask-api"
+  location = "europe-west2"
+  deletion_protection = false
+  ingress = "INGRESS_TRAFFIC_ALL"
+
+  template {
+    containers {
+      image = "us-docker.pkg.dev/cloudrun/container/hello"
+      resources {
+        limits = {
+          cpu    = "2"
+          memory = "1024Mi"
+        }
+      }
+    }
+  }
+}
+
+```
 
 ## About
 
