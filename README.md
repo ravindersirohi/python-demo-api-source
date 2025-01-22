@@ -1,5 +1,5 @@
 # python-demo-api-source
-Python API using flask.
+Python API using flask and Google Cloud Run (Containerized Function)
 
 ## Prerequisite
 
@@ -15,9 +15,10 @@ Perform the below command from prompt.
 
 ## About
 
-Flast Api with UI to add and list items, just to demostrate how to get and post the data on Flask Api via Python.
+Containerized Python Flast Api (with UI to add and list items), just to demostrate how to get and post the data on Flask Api via Python.
 
 ## Additional 
 - [Install Python](https://www.python.org/doc/versions/)
 - [Flask](https://flask.palletsprojects.com/en/stable/)
 - [Google github actions](https://github.com/google-github-actions/auth)
+- [Google Cloud Run]()
